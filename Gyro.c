@@ -28,6 +28,8 @@ void turn (char side) {
 
 	*/
 }
+
+//generic turn method, à la DRY
 void turnBy (int degrees, char side) {
 
 	int degrees10 = degrees * 10;
@@ -35,20 +37,21 @@ void turnBy (int degrees, char side) {
 	SensorType[gyroSensor] = sensorNone;
 	SensorValue[gyroSensor] = sensorGyro;
 
-	while (abs(SensorValue[gyroSensor]) < degrees10) {
+	while (abs(SensorValue[gyroSensor]) < degrees10) { 
 
 		turn(side);
-	}
+	}	
 }
 
+//what should be called if robot wants to turn left or right by specified amount
 void turnLeftBy(int degrees)
-{
+{ 
 	turnBy(degrees,'L');
 }
 
 void turnRightBy(int degrees)
-{
-	turnBy(degrees, 'R');
+{ 
+	turnBy(degrees, 'R');	
 
 }
 
@@ -56,18 +59,17 @@ void turnRightBy(int degrees)
 
 
 
-//Tests the gyro sensor. Makes the robot turn right 90 degrees.
+//Tests the gyro sensor. Makes the robot turn left 90 degrees, and then return into the starting postion.
 
 task gyroTest()
 {
-	int degrees10 = 900;
-	while (abs(SensorValue[gyroSensor]) < degrees10) {
-
-		turn('R');
-	}
-
+	int degrees = 90;
+	turnLeftBy(degrees);
+	wait1Msec(200);
+	turnRightBy(degrees);
 	wait1Msec(500);
 }
+
 
 task main() {
 
