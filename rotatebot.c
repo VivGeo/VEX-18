@@ -43,13 +43,23 @@ void rotateBot(int anglex10){
 	motor[backL] = 0;
 	motor[frontL] = 0;
 }
+
+
+void rotateLeft (int angle) {
+	rotateBot(angle*10);	
+}
+
+void rotateRight (int angle) {
+	rotateBot(-angle*10);	
+}
+
 task main()
 {
-//input is 10*the angle you want, give 900 for 90 deg clockwise
 	gyroinit();
-	//rotateBot(900);
-
-	rotateBot(3600);
-	//rotateBot(450);
+	//rotateLeft(90);
+	//rotateLeft(180);
+	//rotateRight(90);
+	//rotateRight(180);
+	rotateLeft(90);
 
 }
