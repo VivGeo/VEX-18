@@ -19,7 +19,7 @@ void rotateBot(int anglex10){
 	//perfect values - p: .9, i - 0, d:4.4 (speed at .7)
 	float kp = 0.9;
 	float ki = 0;
-	float kd = 4.4;
+	float kd = 2.8;
 
 	float speed = 0;
 	int error2 = 1, integral = 0;
@@ -55,9 +55,18 @@ void rotateRight (int angle) {
 task main()
 {
 	gyroinit();
-	//rotateLeft(90);
-	//rotateLeft(180);
 	//rotateRight(90);
+	//wait1Msec(500);
+	//rotateLeft(180);
+	//wait1Msec(500);
+	//rotateRight(90);
+	//wait1Msec(500);
 	//rotateRight(180);
+<<<<<<< HEAD
 	rotateLeft(90);
+=======
+	//wait1Msec(500);
+	//rotateLeft(90);
+	rotateRight(180);
+>>>>>>> e302c4ee197e495ae331065ca3ea55e821fd3c12
 }
