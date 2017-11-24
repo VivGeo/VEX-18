@@ -44,13 +44,12 @@ void rotateBot(int anglex10){
 	motor[frontL] = 0;
 }
 
-
 void rotateLeft (int angle) {
-	rotateBot(angle*10);	
+	rotateBot(angle*10);
 }
 
 void rotateRight (int angle) {
-	rotateBot(-angle*10);	
+	rotateBot(-angle*10);
 }
 
 task main()
@@ -61,5 +60,4 @@ task main()
 	//rotateRight(90);
 	//rotateRight(180);
 	rotateLeft(90);
-
 }
