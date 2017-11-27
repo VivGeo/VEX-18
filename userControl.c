@@ -18,6 +18,8 @@
 // CHANGE THESE VARIBLES AS NECESSARY
 int armLiftPower = 100;
 int clawPower = 100;
+int clawTarget;
+int clawOpen = 27;
 
 void initialize(){
 	resetMotorEncoder(armLift);
@@ -34,14 +36,16 @@ task driveControl(){
 		if(abs(vexRT[Ch3])>threshold){
 			motor[frontL]=vexRT[Ch3];
 			motor[backL]=vexRT[Ch3];
+			wait1Msec(100);
 			} else {
 			motor[frontL]=0;
 			motor[backL]=0;
 		}
 
 		if(abs(vexRT[Ch2])>threshold){
-			motor[frontR]=vexRT[Ch3];
-			motor[backR]=vexRT[Ch3];
+			motor[frontR]=vexRT[Ch2];
+			motor[backR]=vexRT[Ch2];
+			wait1Msec(100);
 			} else {
 			motor[frontR]=0;
 			motor[backR]=0;
@@ -61,11 +65,21 @@ task armControl(){
 	}
 }
 
-task clawControl(){
-	while(1){
-		if(vexRT[Btn8D]==1){
-			motor[claw] = clawPower;
-
+task theClawPControl(){
+	while (true){
+		if(vexRT[Btn8D] == 1){
+			clawTarget = clawOpen;
+		} else if (vexRT[Btn8L] == 1){
+			clawTarget = 0;
+		}
+		if (nMotorEncoder[claw] < clawTarget-20){
+			motor[claw] = 70;
+		}	else if (nMotorEncoder[claw] > clawTarget+20){
+			motor[claw] = -70;
+		}	else {
+			motor[claw] = 0;
+		}
+		wait1Msec(20);
 	}
 }
 
@@ -73,4 +87,6 @@ task main(){
 	initialize();
 	startTask(driveControl);
 	startTask(armControl);
+	while(1){
+	}
 }
